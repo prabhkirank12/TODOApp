@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 
 function App() {
   //todos will start with an empty array, this is setting the state, state is temporary it will reset once refreshed
@@ -15,13 +16,21 @@ function App() {
     setTodos([...todos, input]);
     setInput(''); //clears the input after enter
   } 
+
   return (
     <div className="App">
       <h1>Hello World!</h1>
       <form>
         {/* mapping the state with the input, capture the data being entered in the input */}
-        <input value={input} onChange={e => setInput(e.target.value)}/>
-        <button type="submit" onClick={addTodo}>Add Todo </button>
+        <FormControl>
+          <InputLabel>Write a todo</InputLabel>
+          <Input value={input} onChange={e => setInput(e.target.value)}/>
+        </FormControl>
+
+        <Button disabled={!input} type="submit" onClick={addTodo} variant="contained" color="secondary">
+          Add Todo
+        </Button>
+        {/* <button type="submit" onClick={addTodo}>Add Todo </button> */}
       </form>
 
     <ul>  
