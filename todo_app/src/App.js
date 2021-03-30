@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
+import Todo from './Todo';
 
 function App() {
   //todos will start with an empty array, this is setting the state, state is temporary it will reset once refreshed
@@ -35,7 +36,7 @@ function App() {
 
     <ul>  
         {todos.map(todo => (
-          <li>{todo}</li>
+          <Todo todo={todo}/>
         ))}
       </ul>
     </div>
