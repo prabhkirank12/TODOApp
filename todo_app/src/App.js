@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import firebase from 'firebase';
 import './App.css';
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import Todo from './Todo';
@@ -16,10 +17,11 @@ function App() {
   // useEffect will fire each time I type anything into the input field
   useEffect(() => {
     // the code here ... fires when the app.js loads
-    db.collection('todos').onSnapshot(snapshot => {
+    db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
       // takes a snapshot and makes docs and then go over each doc and reterives the todo field and add to the array and set to setTOdos
-      // console.log(snapshot.docs.map(doc => doc.data())) => returns an object
-      setTodos(snapshot.docs.map(doc => doc.data().todo))
+      // console.log(snapshot.docs.map(doc => ({id: doc.id, todo: doc.data().todo}))) //=> returns an object
+      setTodos(snapshot.docs.map(doc => ({id: doc.id, todo: doc.data().todo})))
+      
     })
   }, [])
 
@@ -28,7 +30,8 @@ function App() {
     e.preventDefault();
     // this will add to the db
     db.collection('todos').add({
-      todo: input
+      todo: input,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp() //this is the timestamp from the server
     })
     // keep the current array and then append the input to it
     // setTodos([...todos, input]);
@@ -37,11 +40,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello World!</h1>
+      <h1>Your Todo!</h1>
       <form>
         {/* mapping the state with the input, capture the data being entered in the input */}
         <FormControl>
-          <InputLabel>Write a todo</InputLabel>
+          <InputLabel>Write a todo </InputLabel>
           <Input value={input} onChange={e => setInput(e.target.value)}/>
         </FormControl>
 
@@ -56,6 +59,7 @@ function App() {
           <Todo todo={todo}/>
         ))}
       </ul>
+      
     </div>
   );
 }
