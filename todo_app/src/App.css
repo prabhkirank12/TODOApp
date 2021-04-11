@@ -2,9 +2,45 @@
   text-align: center;
 }
 
+@keyframes title {
+  from { color: #C61162;}
+  to { color: #3452ff;}
+}
+
+h1 {
+  font-size: 65px;
+  color: #C61162;
+  border-radius: 3px;
+  margin-right: 10px;
+  letter-spacing: 5px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+  margin-top: 5px;
+  animation-name: title;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+body {
+  background-color: #e0e6e7;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.input {
+  width: 400px;
+  margin-right: 8px;
+}
+
+.todo-bttn {
+  width: 120px;
+  height: 45px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  border: 2px solid green;
 }
 
 @media (prefers-reduced-motion: no-preference) {

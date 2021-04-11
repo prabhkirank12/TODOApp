@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
 import './App.css';
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 import Todo from './Todo';
 import db from './firebase';
 
@@ -36,25 +37,26 @@ function App() {
     // keep the current array and then append the input to it
     // setTodos([...todos, input]);
     setInput(''); //clears the input after enter
+    console.log(e)
   } 
 
   return (
     <div className="App">
-      <h1>Your Todo!</h1>
-      <form>
+      <h1><ListAltIcon className="todo-icon"/> Todo</h1>
+      <form className="form">
         {/* mapping the state with the input, capture the data being entered in the input */}
         <FormControl>
           <InputLabel>Write a todo </InputLabel>
-          <Input value={input} onChange={e => setInput(e.target.value)}/>
+          <Input value={input} onChange={e => setInput(e.target.value)} className="input"/>
         </FormControl>
 
-        <Button disabled={!input} type="submit" onClick={addTodo} variant="contained" color="secondary">
+        <Button className="todo-bttn" disabled={!input} type="submit" onClick={addTodo} variant="contained" color="secondary">
           Add Todo
         </Button>
         {/* <button type="submit" onClick={addTodo}>Add Todo </button> */}
       </form>
-
-    <ul>  
+      <ul> 
+         
         {todos.map(todo => (
           <Todo todo={todo}/>
         ))}
