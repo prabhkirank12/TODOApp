@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import db from './firebase';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import { makeStyles } from '@material-ui/core/styles';
 import './Todo.css';
-import { Button, List, ListItem, ListItemText, Modal } from '@material-ui/core'
+import { startConfetti, stopConfetti, removeConfetti } from './confetti.js';
+import { Button, List, ListItem, ListItemText, ListItemAvatar, Modal } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +37,19 @@ function Todo(props) {
 
         setOpen(false);
     }
+
+    const done = () => {
+        stopConfetti();
+        removeConfetti();
+    }
+
+    const deleteTodo = () => {
+        db.collection('todos').doc(props.todo.id).delete();
+        startConfetti();
+        setTimeout(() => {
+            done()
+        }, 3000)
+    }
     return (
         <>
         <Modal open={open} onClose={e => setOpen(false)}>
@@ -49,11 +64,12 @@ function Todo(props) {
 
         <List className="todo_list">
             <ListItem>
+                <ListItemAvatar> <CheckBoxOutlineBlankIcon className='checkbox'/> </ListItemAvatar> 
               <ListItemText className="todo-text" primary={props.todo.todo} secondary={props.todo.createdAt} />
             </ListItem>
             <div className='bttn-div'>
                 <Button className='bttn' onClick={e => setOpen(true)}><EditIcon />Edit</Button>
-                <Button className='bttn' onClick={e => db.collection('todos').doc(props.todo.id).delete()}><DeleteIcon />DELETE ME</Button>
+                <Button className='bttn' onClick={deleteTodo}><DeleteIcon />DELETE ME</Button>
             </div>
         </List>
         

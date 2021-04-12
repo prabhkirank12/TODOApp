@@ -48,7 +48,11 @@
 .todo-text {
    text-transform: uppercase;
     text-emphasis: bold;
-    font-size: large;
+    font-size: larger;
+}
+
+.checkbox {
+    font-size: small;
 }
 
 @keyframes title {

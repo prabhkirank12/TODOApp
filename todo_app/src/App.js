@@ -42,19 +42,21 @@ function App() {
 
   return (
     <div className="App">
-      <h1><ListAltIcon className="todo-icon"/> Todo</h1>
-      <form className="form">
-        {/* mapping the state with the input, capture the data being entered in the input */}
-        <FormControl>
-          <InputLabel>Write a todo </InputLabel>
-          <Input value={input} onChange={e => setInput(e.target.value)} className="input"/>
-        </FormControl>
+      <div className="title-form">
+        <h1><ListAltIcon className="todo-icon"/> ToDo List:</h1>
+        <form className="form">
+          {/* mapping the state with the input, capture the data being entered in the input */}
+          <FormControl>
+            <InputLabel>Write a todo </InputLabel>
+            <Input value={input} onChange={e => setInput(e.target.value)} className="input"/>
+          </FormControl>
 
-        <Button className="todo-bttn" disabled={!input} type="submit" onClick={addTodo} variant="contained" color="secondary">
-          Add Todo
-        </Button>
-        {/* <button type="submit" onClick={addTodo}>Add Todo </button> */}
-      </form>
+          <Button className="todo-bttn" disabled={!input} type="submit" onClick={addTodo} variant="contained" color="secondary">
+            Add Todo
+          </Button>
+          {/* <button type="submit" onClick={addTodo}>Add Todo </button> */}
+        </form>
+      </div>
       <ul> 
          
         {todos.map(todo => (
