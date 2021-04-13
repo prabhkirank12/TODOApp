@@ -12,3 +12,8 @@ Todo is a simple app that allows you to create, update, and delete a todo. When 
 
 # Challenge
 Firebase was a new technology that I had no experience with so it was fun learning it. 
+
+# Future Functionality
+* User functionality
+  * A user should be able to create account, login/out 
+  
